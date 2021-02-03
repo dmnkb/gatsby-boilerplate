@@ -1,21 +1,34 @@
 import React from "react"
+import styled from 'styled-components'
+
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+
+import "../styles/grid.scss"
+
+import Button from '@material-ui/core/Button';
+
+const StyledButton = styled(Button)`
+  
+`
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+    <div class="grid">
+      <div class="inner">
+        <div class="col ip12-9">
+          9
+        </div>
+        <div class="col ip12-3">
+          3
+        </div>
+      </div>
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    Hello World
+    <StyledButton variant="contained" color="primary">Button</StyledButton>
   </Layout>
 )
 
