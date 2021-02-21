@@ -5,8 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
+import React, { ReactNode } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { ThemeProvider } from 'styled-components';
@@ -17,14 +16,13 @@ import {
 } from '@material-ui/core/styles';
 
 import Header from "./header"
-import "./layout.css"
 
 const myTheme = createMuiTheme({
   typography: {
     fontFamily: [
       'Syne',
       'sans-serif'
-    ],
+    ].join(","),
   },
   palette: {
     primary: {
@@ -42,12 +40,23 @@ const myTheme = createMuiTheme({
   },
 });
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+type LayoutProps = {
+  readonly children: ReactNode
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+
+  const staticPageData = useStaticQuery(graphql`
+    query StaticPageQuery {
       site {
         siteMetadata {
           title
+        }
+      },
+      allWpMenuItem(filter: {locations: {eq: PRIMARY}}) {
+        nodes {
+          url
+          label
         }
       }
     }
@@ -57,7 +66,9 @@ const Layout = ({ children }) => {
     <MuiThemeProvider theme={myTheme}>
       <ThemeProvider theme={myTheme}>
         
-        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <Header 
+          siteTitle={staticPageData.site.siteMetadata?.title || `Title`} 
+          navItems={staticPageData.allWpMenuItem.nodes} />
         
         <main>{children}</main>
         
@@ -72,10 +83,6 @@ const Layout = ({ children }) => {
       </ThemeProvider>
     </MuiThemeProvider>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

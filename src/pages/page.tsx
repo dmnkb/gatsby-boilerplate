@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
-
 import { graphql, Link } from "gatsby"
-
-import Layout from "../components/layout"
-import SEO from "../components/seo"
 
 import { 
   Typography,
 } from '@material-ui/core';
 
+import Layout from "../components/layout"
+
 import "../styles/grid.scss"
 
-const IndexPage = ({ data }) => {
+const Post = ({ data }) => {
 
   return (
     <Layout>
-
-      <SEO title="Home" />
-
       <div className="grid">
         <div className="inner">
-          <div className="col l-6 ip12-6 s-12">
+          <div className="s-12 col">
 
-            <Typography variant="h1">{data.wpPage.title || "Title"}</Typography>
+            <Typography variant="h1">{data.wpPage.title}</Typography>
 
           </div>
         </div>
       </div>
-
     </Layout>
   )
 }
 
 export const query = graphql`
-  query {
-    wpPage(isFrontPage: {eq: true}) {
+  query($id: String!) {
+    wpPage(id: {eq: $id}) {
       title
     }
   }
 `
 
-export default IndexPage
+export default Post
