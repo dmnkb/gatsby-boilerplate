@@ -7,9 +7,9 @@ import {
 
 import Layout from "../components/layout"
 
-import "../styles/grid.scss"
+import "../theme/grid.scss"
 
-const Post = ({ data }) => {
+const Page = ({ data }) => {
 
   return (
     <Layout>
@@ -34,4 +34,4 @@ export const query = graphql`
   }
 `
 
-export default Post
+export default Page

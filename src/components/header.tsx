@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle, navItems }) => {
             <ul>
               {navItems.map((item: any) => {
                 return (
-                  <li key={item.slug}>
+                  <li key={item.url}>
                     <Link to={item.url}>
                       <Typography variant="body1">{item.label}</Typography>
                     </Link>

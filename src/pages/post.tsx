@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { graphql, Link } from "gatsby"
+
+import { 
+  Typography,
+} from '@material-ui/core';
 
 import Layout from "../components/layout"
 
-import { graphql, Link } from "gatsby"
-
-import "../styles/grid.scss"
+import "../theme/grid.scss"
 
 const Post = ({ data }) => {
 
@@ -12,9 +15,11 @@ const Post = ({ data }) => {
     <Layout>
       <div className="grid">
         <div className="inner">
-          Post
-          {JSON.stringify(data)}
+          <div className="s-12 col">
 
+            <Typography variant="h1">{data.wpPost.title}</Typography>
+
+          </div>
         </div>
       </div>
     </Layout>

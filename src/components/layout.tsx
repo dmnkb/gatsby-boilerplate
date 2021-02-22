@@ -9,36 +9,10 @@ import React, { ReactNode } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { ThemeProvider } from 'styled-components';
-
-import {
-  createMuiTheme,
-  ThemeProvider as MuiThemeProvider
-} from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import theme from '../theme/theme'
 
 import Header from "./header"
-
-const myTheme = createMuiTheme({
-  typography: {
-    fontFamily: [
-      'Syne',
-      'sans-serif'
-    ].join(","),
-  },
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#f6c8b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
 
 type LayoutProps = {
   readonly children: ReactNode
@@ -53,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           title
         }
       },
-      allWpMenuItem(filter: {locations: {eq: PRIMARY}}) {
+      allWpMenuItem(filter: {locations: {eq: MENU_1}}) {
         nodes {
           url
           label
@@ -63,8 +37,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   `)
 
   return (
-    <MuiThemeProvider theme={myTheme}>
-      <ThemeProvider theme={myTheme}>
+    <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         
         <Header 
           siteTitle={staticPageData.site.siteMetadata?.title || `Title`} 
